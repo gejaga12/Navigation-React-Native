@@ -1,15 +1,16 @@
-import React from 'react';
-import { View, Text, Image } from 'react-native';
+import React, { useContext } from 'react';
+import { View, Text, Button } from 'react-native';
+import { AuthContext } from '../context/AuthContext';
+import { styles } from '../themes/appTheme';
 
 export const ContactsScreen = () => {
+
+  const { singIn, authState: { isLoggendIn } } = useContext(AuthContext);
+
   return (
-    <View>
-    <Image
-      source={{
-        uri: 'https://1.bp.blogspot.com/-R52N1ftAylU/X61uogzvmeI/AAAAAAAAJZA/xavceD8-2cASYTGyZxDq0WYODHGnTiZpgCLcBGAsYHQ/s954/Pinned%2Bconversations.png',
-      }}
-      style={{ width: 420, height: 580 }}
-    />
-  </View>
+    <View style={styles.globalMargin}>
+      <Text style={styles.title}> AJUSTES </Text>
+      { !isLoggendIn && <Button title="Sign In" onPress={singIn}/> }
+    </View>
   );
 };
