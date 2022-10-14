@@ -3,28 +3,34 @@ import { Image, Text, View, TouchableOpacity } from 'react-native';
 import {
   createDrawerNavigator,
   DrawerContentComponentProps,
-  DrawerContentOptions,
   DrawerContentScrollView,
 } from '@react-navigation/drawer';
 import { SettingsScreen } from '../screens/SettingsScreen';
-import { StackNavigator } from './StackNavigator';
 import { styles } from '../themes/appTheme';
 import { Tabs } from './Tabs';
+import { TopTabNavigator } from './TopTabNavigator';
+
+import Icon from 'react-native-vector-icons/Ionicons';
 
 const Drawer = createDrawerNavigator();
 
 export const MenuLateral = () => {
   return (
-    <Drawer.Navigator drawerContent={props => <MenuInterno {...props} />}>
-      <Drawer.Screen name="Tabs" component={ Tabs } />
+    <Drawer.Navigator 
+    screenOptions={{
+      headerShown: false
+    }}
+    drawerContent={props => <MenuInterno {...props} />}>
+      <Drawer.Screen name="Tabs" component={Tabs} />
       <Drawer.Screen name="SettingsScreen" component={SettingsScreen} />
+      <Drawer.Screen name="TopTabNavigator" component={TopTabNavigator} />
     </Drawer.Navigator>
   );
 };
 
 const MenuInterno = ({
   navigation,
-}: DrawerContentComponentProps<DrawerContentOptions>) => {
+}: DrawerContentComponentProps) => {
   return (
     <DrawerContentScrollView>
       {/* FOTO DEL AVATAR */}
@@ -40,16 +46,26 @@ const MenuInterno = ({
       {/* OPCIONES DEL MENU */}
       <View style={styles.menuContainer}>
         <TouchableOpacity
-          style={styles.menuBoton}
+          style={{ ...styles.menuBoton, flexDirection: 'row' }}
           onPress={() => navigation.navigate('Tabs')}>
-          <Text style={styles.menuTexto}>Navegacion</Text>
+          <Icon name="compass-outline" size={25} color="grey" />
+          <Text style={styles.menuTexto}> Navegacion </Text>
         </TouchableOpacity>
 
         <TouchableOpacity
-          style={styles.menuBoton}
+          style={{ ...styles.menuBoton, flexDirection: 'row' }}
           onPress={() => navigation.navigate('SettingsScreen')}>
-          <Text style={styles.menuTexto}>Ajustes</Text>
+          <Icon name="cog-outline" size={25} color="grey" />
+          <Text style={styles.menuTexto}> Ajustes </Text>
         </TouchableOpacity>
+
+        <TouchableOpacity
+          style={{ ...styles.menuBoton, flexDirection: 'row' }}
+          onPress={() => navigation.navigate('TopTabNavigator')}>
+          <Icon name="cog-outline" size={25} color="grey" />
+          <Text style={styles.menuTexto}> Menu </Text>
+        </TouchableOpacity>
+
       </View>
     </DrawerContentScrollView>
   );

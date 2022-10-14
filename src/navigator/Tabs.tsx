@@ -2,11 +2,11 @@ import React from 'react';
 import { Platform, Text } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Tab1Screen } from '../screens/Tab1Screen';
-import { Tab2Screen } from '../screens/Tab2Screen';
 import { StackNavigator } from './StackNavigator';
 import { colores } from '../themes/appTheme';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import { TopTabNavigator } from './TopTabNavigator';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 export const Tabs = () => {
   return Platform.OS == 'ios' ? <TabsIOS /> : <TabsAndroid />;
@@ -16,6 +16,7 @@ const BottonTabAndroid = createMaterialBottomTabNavigator();
 
 const TabsAndroid = () => {
   return (
+    
     <BottonTabAndroid.Navigator
     sceneAnimationEnabled={true}
     barStyle= {{
@@ -34,35 +35,35 @@ const TabsAndroid = () => {
         let iconName: string = '';
         switch (route.name) {
           case 'Tab1Screen':
-            iconName = 'T1';
+            iconName = 'chatbubbles-outline';
             break;
           case 'Tab2Screen':
-            iconName = 'T2';
+            iconName = 'aperture-outline';
             break;
           case 'StackNavigator':
-            iconName = 'ST';
+            iconName = 'person-outline';
             break;
         }
-        return <Text style={{ color }}>{iconName}</Text>;
+        return <Icon name={ iconName } size={ 20 } color={ color }/>
       },
     })}
     >
       <BottonTabAndroid.Screen
         name="Tab1Screen"
         options={{
-          title: 'TAB 1',
+          title: 'HOME',
         }}
-        component={Tab1Screen}
+        component={ Tab1Screen }
       />
       <BottonTabAndroid.Screen
         name="Tab2Screen"
-        options={{ title: 'TAB 2' }}
-        component={TopTabNavigator}
+        options={{ title: 'MENU' }}
+        component={ TopTabNavigator }
       />
       <BottonTabAndroid.Screen
         name="StackNavigator"
         options={{ title: 'STACK' }}
-        component={StackNavigator}
+        component={ StackNavigator }
       />
     </BottonTabAndroid.Navigator>
   );
@@ -101,6 +102,7 @@ const TabsIOS = () => {
           return <Text style={{ color }}>{iconName}</Text>;
         },
       })}>
+
       {/* tabBarIcon: props => <Text style={{ color: props.color }}>T1</Text>, */}
 
       <BottonTabIOS.Screen

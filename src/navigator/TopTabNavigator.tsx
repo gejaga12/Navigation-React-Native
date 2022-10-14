@@ -5,12 +5,14 @@ import { ContactsScreen } from '../screens/ContactsScreen';
 import { ChatScreen } from '../screens/ChatScreen';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { colores } from '../themes/appTheme';
-import { Text } from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 const Tab = createMaterialTopTabNavigator();
 
 export const TopTabNavigator = () => {
+
   const { top: paddingTop } = useSafeAreaInsets();
+  
   return (
     <Tab.Navigator
       style={{ paddingTop }}
@@ -31,21 +33,22 @@ export const TopTabNavigator = () => {
           let iconName: string = '';
           switch (route.name) {
             case 'CHAT':
-              iconName = 'CH';
+              iconName = 'chatbubbles-outline';
               break;
             case 'CONTACTOS':
-              iconName = 'CO';
+              iconName = 'list-outline';
               break;
             case 'ALBUM':
-              iconName = 'AL';
+              iconName = 'albums-outline';
               break;
           }
-          return <Text style={{ color }}>{iconName}</Text>;
+          return <Icon name={ iconName } size={ 25 } color={ color }/>;
         },
       })}>
-      <Tab.Screen name="CHAT" component={ChatScreen} />
-      <Tab.Screen name="CONTACTOS" component={ContactsScreen} />
-      <Tab.Screen name="ALBUM" component={AlbumsScreen} />
+        
+      <Tab.Screen name="CHAT" component={ ChatScreen } />
+      <Tab.Screen name="CONTACTOS" component={ ContactsScreen } />
+      <Tab.Screen name="ALBUM" component={ AlbumsScreen } />
     </Tab.Navigator>
   );
 };
